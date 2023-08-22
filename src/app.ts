@@ -7,11 +7,13 @@ import router from "./routes";
 
 const app = express();
 
-app.use(router)
+/* order of middlewares matters */
+app.use(express.json());
+app.use(router);
 
 const port = config.get("port");
 app.listen(port, () => {
-  log.info(`App started at http://lcoalhost:${port}`);
+  log.info(`App started at http://localhost:${port}`);
 
   connectToDb();
 });
