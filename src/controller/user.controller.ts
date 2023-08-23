@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import sendEmail from "../utils/mailer";
+import log from "../utils/logger";
 
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput>,
   res: Response
 ) {
   const body = req.body;
-
+  log.info("createUserHandler");
   try {
     const user = await createUser(body); //here we are not checking if user
     //exist before creating user
